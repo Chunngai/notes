@@ -1,0 +1,198 @@
+# **Code Layout**
+## Indentation
+### (a1)
+```py
+foo = long_function_name(var_one, var_two,
+                         var_three, var_four)
+```
+
+### (a2)
+```py
+foo = long_function_name(
+    var_one, var_two,
+    var_three, var_four)
+
+def long_function_name(
+        var_one, var_two, var_three,
+        var_four):
+    print(var_one)
+```
+<br/>
+
+### (b1)
+```py
+if (this_is_one_thing and
+    that_is_another_thing):
+    do_something()
+```
+
+### (b2)
+```py
+if (this_is_one_thing and
+    that_is_another_thing):
+    # Since both conditions are true, we can frobnicate
+    do_something()
+```
+
+### (b3)
+```py
+if (this_is_one_thing
+        and that_is_another_thing):
+    do_something()
+```
+<br/>
+
+### (c1)
+```py
+my_list = [
+    1, 2, 3,
+    4, 5, 6,  # Notice the ',' here
+    ]
+
+result = some-function_that_takes_arguments(
+    'a', 'b', 'c',
+    'd', 'e', 'f'
+    )
+```
+
+### (c2)
+```py
+my_list = [
+    1, 2, 3,
+    4, 5, 6,
+]
+
+result = some-function_that_takes_arguments(
+    'a', 'b', 'c',
+    'd', 'e', 'f'
+)
+```
+
+## Tabs or Spaces?
+Use **4 spaces**.
+
+## Maximum Line Length
+Code: **79** characters
+Docstrings or comments: **72** characters
+Preferred way of wrapping long lines: **implied** line continuation inside parentheses, brackets and braces.
+
+## Source File Encodings:
+Files using **UTF-8** in Python 3 **should not** have an encoding declaration.
+
+## Imports
+### (a1)
+```py
+import os
+import sys
+```
+
+### (a2)
+```py
+from subprocess import Popen, PIPE
+```
+<br/>
+
+Import group order:
+1. Std library Imports
+2. Related third party imports
+3. Local application/library specific imports
+
+Each group should be separated by a blank line.
+
+# **String Quotes**
+Pick a rule and **stick to** it.
+Always use **double quote characters** for triple quoted strings.
+
+# **Whitespace in Expressions and Statements**
+## Pet Peeves
+In a slice the colon should have **equal** amounts on either side.
+When a slice parameter is **omitted**, the space is omitted.
+
+### (a1)
+```py
+ham[:9:3]
+ham[lower:upper]
+
+ham[lower+offset : upper+offset]
+ham[: upper_fn(x) : step_fn(x)], ham[:: step_fn(x)]
+
+ham[lower + offset : upper + offset]
+# Wrong: ham[lower + offset:upper + offset]
+```
+
+## Other Recommendations
+If operators with **different priorities** are used, consider adding whitespaces around the operators with the **lowest** priority(ies).
+
+### (a1)
+```py
+x = x*2 - 1
+# Not recommended: x = x * 2 - 1
+hypot2 = x*x + y*y
+# Not recommended: hypot2 = x * x + y * y
+c = (a+b) * (a-b)
+# Not recommended: c = (a + b) * (a - b)
+```
+
+# **Comments**
+Always make a **priority** of keeping the comments **up-to-date** when the code **changes**.
+Comments should be **complete** sentences.
+The **first** word should be **capitalized**.
+**Block** comments generally consists of one or more paras built out of **complete** sentences, with each sentence ending in a **period**.
+You should use **2** spaces after a sentence-ending period in multi-sentence comments.
+
+## Block Comments
+Each line of a block comment starts with a **#** and a single space.
+Paras inside a block comment are separated by a **line** containing a single
+**#**.
+
+## Inline Comments
+Use inline comments **sparingly**.
+
+## Documentation Strings
+Write docstrings for all **public modules, functions, classes, and methods**.
+Docstrings are **not necessary** for **non-public** methods, but you should have a **comment** that describes what the method does.
+### (a1)
+```py
+"""Return a foobang  # Capitalize the first character
+
+Optional plotz says to frobnicate the bizbaz first.
+"""
+```
+For **one** liner docstrings, keep the **closing """** on the **same** line.
+
+# **Naming Conventions**
+## Descriptive: Naming Styles
+When using **acronyms** in **CapWords**, capitalize **all** the letters of the acronym, thus `HTTPServerError` is better than `HttpServer`.
+`_single_leading_underscore`: weak **internal use** indicator. `from M import *` does **not** import objs whose names start with an underscore.
+`single_trailing_underscore_`: used by convention to avoid **conflicts** with **Python keyword**: `Tkinter.Toplevel(master, class_='ClassName')`
+`__double_leading_underscore`: when naming a **class** attr, invokes name mangling (inside class `FooBar`, `__boo` becomes `_FooBar__boo`)
+
+## Packages and Modules Names
+Modules: **short**, **all lowercase** names, underscores can be used.
+Packages: **short**, **all lowercase** names, the use of **underscores** is **discouraged**.
+
+## Global Variable Names
+Modules that are designed for use via `from M import *` should use `__all___` mechanism to **prevent** exporting globals, or use the older convention of **prefixing** such globals with an **underscore**.
+
+## Method Names and Instance Variables
+Use **one leading underscore** only for **non-public** methods and instance vars.
+
+## Constants
+All **capital** letters.
+
+# **Programming Recommendations**
+1. Don't use `a += b`or `a = a + b` for string concatenation, use `''.join()` instead.
+2. Beware of writing `if x` when you really mean `if x is not None`.
+3. When implementing ordering operations with **rich comparisons**, it's best to implement all **six** operations(`__eq__` and so on) rather than relying on other code to only exercise a particular comparison.
+4. Derive exceptions from `Exception` rather than `BaseException`.
+5. When catching exceptions, mention **specific** exceptions whenever possible instead of using a bare `except:` clause. If you want to catch all exceptions that signal program errors, use `except Exception:`.
+6. For all try/except clauses, limit the `try` clause to the absolute **minimum** amount of code necessary.
+7. Be consistent in return statements. Either **all** return statements in a function should return an expression, or **none** of them should. If **any** statement returns an expression, any return statement where **no** value is returned should explicitly state this as `return None`, and an **explicit** return statement should be present at the **end** of the function (if reachable).
+8. Use `''.startswith()` and `''.endswith()` instead of string **slicing** to check for prefixes or suffixes.
+9. Object type comparison should always use `isinstance()` instead of comparing types directly. `if isinstance(obj, int):`
+10. For sequences, use the fact that **empty** sequences are `False` instead of using `if len(seq):`.
+11. Use of the flow control statements `return`/`break`/`continue` within the finally suite of `try...finally`, where the flow control statement would jump **outside** the finally suite, is **discouraged**.
+
+---
+Reference:
+[PEP 8 -- Style Guide for Python Code](https://www.python.org/dev/peps/pep-0008/)
