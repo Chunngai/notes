@@ -1,0 +1,4 @@
+--2020-03-16 13:22:55--  https://s3.amazonaws.com/opennmt-models/iwslt.pt
+s3.amazonaws.com (s3.amazonaws.com) をDNSに問いあわせています... 52.216.160.165
+s3.amazonaws.com (s3.amazonaws.com)|52.216.160.165|:443 に接続しています... 接続しました。
+SSL による接続が確立できません。
