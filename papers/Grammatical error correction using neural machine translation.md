@@ -1,4 +1,4 @@
-# Grammatical error correction using neural machine translation
+# Grammatical Error Correction Using Neural Machine Translation
 
 ## 1. Background
 ### 1.1 Pros of NMT for GEC:
@@ -13,18 +13,27 @@
 ### 1.2 Cons of NMT for GEC:  
 1. Limited vocab size in NMT: does not perform well on rare words and OOVs. More serious for NMT for GEC due to mispelling errors, etc..
 
-## 2. What's done
+## 2. What's Done
 1. The first study using NMT for GEC.  
 
 2. Proposed a two-step approach to handle the rare word problem.  
   (1) Applied unsupervised alignment models to find src of unk trg.  
   (2) Used a word-level translation model to translate src.  
 
-## 3. Models and Methods
-### 3.1. Neural machine translation  
-  + (Model) Attn model by Bahdanau.
+## 3. Methods
+  1. erroneous sentence $\xrightarrow {NMT}$ correction with \<unk>s  
 
-  Details  
+  2.1. correction with \<unk>s $\xrightarrow{\mbox{unsupervised aligner}}$ src words of \<unk>s in the src sentence
+
+  2.2. src words $\xrightarrow [\mbox{replace <unk>s with their translations}]{\mbox{word-level translator for <unk>s}}$ correction
+
+  (2.1 & 2.2 are implemented in a post-processing step)
+
+## 4. Models
+### 4.1. Neural Machine Translation  
+  + Attn model by Bahdanau.
+
+#### 4.1.1. Procedure & Hyper-params  
   1. Training procedure & hyper-params are similar to those used by Bahdanau et al. (2014).
 
   2. `max_len` = 100
@@ -34,22 +43,15 @@
   4. `src_vocab_size` = {30, 50, 80}K   
   (prelim exp shows increasing src_vocab_size is more useful than target side.)
 
-### 3.2. Handling rare words.
-  + (Model) GIZA++ & METEOR for word alignment.
+### 4.2. Handling Rare Words.
+  1. GIZA++ & METEOR for word alignment.  
+      + Output sentences from NMT are aligned with src using GIZA++.  
 
-  + (Methods)
-    1. unks in trg sentence $\xrightarrow{\mbox{unsupervised aligner}}$ src words in src sentebnce.
+      + Alignment info learnt by METEOR is used by GIZA++.
 
-    2. Src words $\xrightarrow{\mbox{word level translator}}$ translations of unks (in a post-processing step).
+  2. Word-leval translation model is learnt from IBM Model 4.
 
-  Details  
-  1. Output sentences from NMT are aligned with src using GIZA++.
-
-  2. Alignment info learnt by METEOR is used by GIZA++.
-
-  3. The word-leval translation model is learnt from IBM Model 4.
-
-  Related Info
+#### 4.2.1. Info
   1. Similar to Luong et al. (2015).  #?
 
   2. Outputs of the NMT model are used for aligning with the src instead of re-annotating as proposed by Luong et al. 2015.  #?  
@@ -63,23 +65,23 @@
 
   3. METEOR is helpful as it identifies not only words with exact matches but also words with identical stems, word choice corrections with synonyms or unigram paragraghs.
 
-## 4. Data
-### 4.1. Datasets
+### 4.3. Evaluation
+1. I-measure
+
+2. $M^2$ Scorer
+
+3. GLEU
+
+## 5. Data
+### 5.1. Datasets
 1. FCE
 
 2. CLC
 
 3. NUCLE (for testing generalization)
 
-### 4.2. Data preprocessing
+### 5.2. Data Preprocessing
 1. RASP for both training and test data
-
-## 5. Evaluation
-1. I-measure
-
-2. $M^2$ Scorer
-
-3. GLEU
 
 ## 6. Notes:
 ### 6.1. Notes of GEC
