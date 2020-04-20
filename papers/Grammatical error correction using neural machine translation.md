@@ -11,7 +11,7 @@
 3. NMT for GEC: is able to correct wrong sentences that have not been seen in the training set more effectively.  #? Luong et al., (2015)  
 
 ### 1.2 Cons of NMT for GEC:  
-1. Limited vocab size in NMT: does not perform well on rare words and OOVs. More serious for NMT for GEC due to mispelling errors, etc..
+1. Limited vocab size in NMT: does not perform well on rare words and OOVs. More serious for NMT for GEC due to misspelling errors, etc..
 
 ## 2. What's Done
 1. The first study using NMT for GEC.  
