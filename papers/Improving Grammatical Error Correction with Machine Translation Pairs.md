@@ -69,7 +69,7 @@ Chinese is chosen to be the field language as it is less similar to Eng and may 
   + MERT
 
 #### 5.1.3. Training Details
-  1. Weigths of each compoennt is tuned in the Moses sys.
+  1. Weigths of each component is tuned in the Moses sys.
 
   2. 2 duplicas of the tuned model is created by manually increasing or decreasing the weight of LM by a factor of 50%, for cmp.
 
