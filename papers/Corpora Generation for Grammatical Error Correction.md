@@ -27,6 +27,22 @@
 (GEC model) Transformer.
 
 ## 2. Data Generation from Wikipedia Revision Histories
+(Method 1) ![method1](imgs/CorporaGenerationforGrammaticalErrorCorrection.jpg)
+(Method 1)
+1. Discard large pages
+2. Downsample (to prevent imbalance distribution)
+3. Extract texts
+4. Align texts
+5. Probabilistically cut aligned text, skipping over non-aligned seqs
+6. Probabilistically introduce spelling errors to train a model proficient at grammar and spelling correction
+    + deletion
+    + insertion
+    + replacement
+    + transposition of adjacent chrs
+7. Throw out examples exceeding a max len of word-pieces
+8. Downsample identity examples
+
+(Method 1 Limitation) The vast majority of the generated data are not grammatical errors.
 
 ## 5. Model
 (Model) Transformer.
