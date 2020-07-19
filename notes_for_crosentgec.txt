@@ -1,0 +1,12 @@
+I. nltk for python2 is needed. pip2 is not in the repo of Ubuntu20.04 and it's a problem for running data preparation scripts in the crosentgec repo. Using ubuntu 19.10 in vmware is a solution.
+	
+	sudo apt-get install python-pip
+
+II. prepare_data_modified.sh:
+	(1) comment lang8 code
+	(2) release3.2 -> release3.3
+	(3) release3.3 of nucle should be changed to gzip
+	
+III. nltkv2.0b7 dependencies: PyYAML 3.08 (should be installed from code downloaded from pypi, and run `python setup.py install` in the folder.), setuptools 0.6c11.
+
+IV. punkt/english.pickle is needed. Download it from github of nltk.
